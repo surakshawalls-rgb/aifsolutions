@@ -1,0 +1,32 @@
+<h2>Company Information</h2>
+
+<form [formGroup]="companyForm" (ngSubmit)="save()">
+
+  <label>Company Name</label>
+  <input type="text" formControlName="name">
+
+  <label>Tagline</label>
+  <input type="text" formControlName="tagline">
+
+  <label>GSTIN</label>
+  <input type="text" formControlName="gstin">
+
+  <label>Head Office Address</label>
+  <textarea rows="3" formControlName="headOffice"></textarea>
+
+  <label>Branch Office Address</label>
+  <textarea rows="3" formControlName="branchOffice"></textarea>
+
+  <label>Contact Number</label>
+  <input type="text" formControlName="phone">
+
+  <label>Email</label>
+  <input type="email" formControlName="email">
+
+  <label>Website</label>
+  <input type="text" formControlName="website">
+
+  <br><br>
+  <button type="submit">Save Company Details</button>
+
+</form>

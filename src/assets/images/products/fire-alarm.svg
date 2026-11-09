@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" fill="none">
+  <rect width="400" height="250" fill="#F5F7FA"/>
+  <rect x="120" y="70" width="160" height="100" rx="8" fill="#E5E7EB" stroke="#D1D5DB" stroke-width="2"/>
+  <rect x="140" y="90" width="120" height="15" rx="2" fill="#10243A"/>
+  <circle cx="200" cy="130" r="20" fill="#E53935"/>
+  <rect x="190" y="120" width="20" height="20" rx="2" fill="white"/>
+  <rect x="140" y="160" width="50" height="8" rx="2" fill="#3B82F6"/>
+  <rect x="210" y="160" width="50" height="8" rx="2" fill="#3B82F6"/>
+  <text x="200" y="220" text-anchor="middle" font-family="system-ui" font-size="14" fill="#6B7280">Fire Alarm System</text>
+</svg>

@@ -1,0 +1,21 @@
+.public-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 120px; /* Account for fixed header */
+}
+
+@media (max-width: 767px) {
+  .main-content {
+    padding-top: 100px;
+  }
+}
+
+/* Ensure footer stays at bottom */
+.public-layout {
+  min-height: 100vh;
+}

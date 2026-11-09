@@ -1,0 +1,119 @@
+<div class="about-page">
+  <!-- Hero Section -->
+  <section class="page-hero" aria-labelledby="page-title">
+    <div class="page-hero-background" aria-hidden="true"></div>
+    <div class="page-hero-overlay" aria-hidden="true"></div>
+    <div class="container page-hero-content">
+      <h1 id="page-title" class="page-hero-title">About All India Fire Solutions</h1>
+      <p class="page-hero-subtitle">Your trusted partner in comprehensive fire safety since 2021</p>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <section class="section about-intro" aria-labelledby="intro-title">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-content">
+          <h2 id="intro-title" class="section-title-left">Welcome to All India Fire Solutions</h2>
+          <div class="intro-text">
+            <p>
+              Welcome to All India Fire Solutions, your trusted partner in comprehensive fire safety.
+            </p>
+            <p>
+              Since our founding in 2021, we have been dedicated to safeguarding lives, property and businesses
+              from fire hazards with reliable, innovative and high-quality safety systems.
+            </p>
+            <p>
+              Our professional team provides end-to-end fire safety services, including supply, installation,
+              testing and maintenance of fire safety equipment and systems.
+            </p>
+            <p>
+              At All India Fire Solutions, safety is not just a service — it is our mission. We aim to create
+              fire-safe workplaces, homes and industries, ensuring peace of mind for all our clients.
+            </p>
+          </div>
+        </div>
+        <div class="intro-image">
+          <div class="image-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="section mission-vision" aria-labelledby="mv-title">
+    <div class="container">
+      <div class="mv-grid">
+        <article class="mv-card card">
+          <div class="mv-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </div>
+          <h3 class="mv-title">Our Mission</h3>
+          <p class="mv-text">
+            To safeguard lives and property by delivering dependable, high-quality and comprehensive fire safety solutions.
+          </p>
+        </article>
+        <article class="mv-card card">
+          <div class="mv-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+          </div>
+          <h3 class="mv-title">Our Vision</h3>
+          <p class="mv-text">
+            To contribute towards a safer environment by making reliable fire protection systems and professional fire safety services accessible to businesses, industries and communities.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section services-detailed" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="services-title" class="section-title">Our Services</h2>
+        <p class="section-subtitle">We offer a complete range of fire safety solutions, both supply and installation, to meet all your safety requirements:</p>
+      </div>
+      <div class="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        @for (service of services; track service.id) {
+          <app-service-card [service]="service"></app-service-card>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="section about-closing" aria-labelledby="closing-title">
+    <div class="container">
+      <div class="closing-content card">
+        <h2 id="closing-title" class="closing-title">Comprehensive Protection for Every Sector</h2>
+        <p class="closing-text">
+          Our solutions are tailored to homes, offices, industries, hotels, hospitals and commercial spaces,
+          ensuring maximum protection and compliance with applicable fire safety standards.
+        </p>
+        <a routerLink="/enquiry" class="btn btn-primary mt-4">Request a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <app-cta-section></app-cta-section>
+
+  <!-- Contact Info -->
+  <section class="section contact-section" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="contact-title" class="section-title">Contact Information</h2>
+      </div>
+      <app-contact-info></app-contact-info>
+    </div>
+  </section>
+</div>

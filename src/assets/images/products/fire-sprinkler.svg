@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" fill="none">
+  <rect width="400" height="250" fill="#F5F7FA"/>
+  <line x1="80" y1="180" x2="320" y2="180" stroke="#D1D5DB" stroke-width="4"/>
+  <g>
+    <line x1="100" y1="180" x2="100" y2="100" stroke="#10243A" stroke-width="3"/>
+    <circle cx="100" cy="100" r="15" fill="#E53935"/>
+    <circle cx="100" cy="100" r="8" fill="white"/>
+  </g>
+  <g>
+    <line x1="160" y1="180" x2="160" y2="120" stroke="#10243A" stroke-width="3"/>
+    <circle cx="160" cy="120" r="15" fill="#E53935"/>
+    <circle cx="160" cy="120" r="8" fill="white"/>
+  </g>
+  <g>
+    <line x1="220" y1="180" x2="220" y2="100" stroke="#10243A" stroke-width="3"/>
+    <circle cx="220" cy="100" r="15" fill="#E53935"/>
+    <circle cx="220" cy="100" r="8" fill="white"/>
+  </g>
+  <g>
+    <line x1="280" y1="180" x2="280" y2="120" stroke="#10243A" stroke-width="3"/>
+    <circle cx="280" cy="120" r="15" fill="#E53935"/>
+    <circle cx="280" cy="120" r="8" fill="white"/>
+  </g>
+  <text x="200" y="220" text-anchor="middle" font-family="system-ui" font-size="14" fill="#6B7280">Fire Sprinkler System</text>
+</svg>

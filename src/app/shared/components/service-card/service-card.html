@@ -1,0 +1,15 @@
+<article class="service-card card">
+  <div class="service-icon">
+    @if (service().icon) {
+      <img [src]="service().icon" [alt]="" class="service-icon-img" loading="lazy" />
+    } @else {
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+    }
+  </div>
+  <div class="service-content">
+    <h3 class="service-title">{{ service().name }}</h3>
+    <p class="service-description">{{ service().description }}</p>
+  </div>
+</article>

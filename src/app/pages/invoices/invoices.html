@@ -1,0 +1,19 @@
+<h2>Invoices</h2>
+
+<table border="1" width="100%" *ngIf="invoices.length > 0">
+  <tr>
+    <th>#</th>
+    <th>Invoice No</th>
+    <th>Total</th>
+  </tr>
+
+  <tr *ngFor="let inv of invoices; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ inv.invoiceNo }}</td>
+    <td>{{ inv.grandTotal }}</td>
+  </tr>
+</table>
+
+<p *ngIf="invoices.length === 0">
+  No invoices found.
+</p>

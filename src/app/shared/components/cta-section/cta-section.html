@@ -1,0 +1,15 @@
+<section class="cta-section" [class]="variant()">
+  <div class="container">
+    <div class="cta-content">
+      <h2 class="cta-title">{{ title() }}</h2>
+      <p class="cta-subtitle">{{ subtitle() }}</p>
+      <div class="cta-buttons">
+        <a [href]="primaryButtonLink()" class="btn btn-primary">{{ primaryButtonText() }}</a>
+        <a [href]="secondaryButtonLink()" class="btn btn-outline">{{ secondaryButtonText() }}</a>
+        @if (showWhatsApp()) {
+          <a [href]="getWhatsAppUrl()" class="btn btn-whatsapp" target="_blank" rel="noopener">{{ whatsappText() }}</a>
+        }
+      </div>
+    </div>
+  </div>
+</section>

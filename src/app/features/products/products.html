@@ -1,0 +1,104 @@
+<div class="products-page">
+  <!-- Page Hero -->
+  <section class="page-hero" aria-labelledby="page-title">
+    <div class="page-hero-background" aria-hidden="true"></div>
+    <div class="page-hero-overlay" aria-hidden="true"></div>
+    <div class="container page-hero-content">
+      <h1 id="page-title" class="page-hero-title">Our Products</h1>
+      <p class="page-hero-subtitle">Explore our comprehensive range of fire safety products and equipment</p>
+    </div>
+  </section>
+
+  <!-- Search & Filter -->
+  <section class="section search-filter-section" aria-labelledby="filter-title">
+    <div class="container">
+      <div class="search-filter-card card">
+        <div class="search-filter-grid">
+          <div class="search-wrapper">
+            <label for="product-search" class="visually-hidden">Search products</label>
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input
+                type="search"
+                id="product-search"
+                class="form-input search-input"
+                placeholder="Search products by name, description, or category..."
+                [value]="searchTerm()"
+                (input)="onSearchChange($event)"
+                aria-label="Search products"
+              />
+            </div>
+          </div>
+          <div class="filter-wrapper">
+            <label for="category-filter" class="visually-hidden">Filter by category</label>
+            <div class="select-wrapper">
+              <select
+                id="category-filter"
+                class="form-select category-select"
+                [value]="selectedCategory()"
+                (change)="onCategoryChange($event)"
+                aria-label="Filter by category"
+              >
+                <option value="">All Categories</option>
+                @for (category of categories; track category) {
+                  <option [value]="category">{{ category }}</option>
+                }
+              </select>
+              <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          @if (searchTerm() || selectedCategory()) {
+            <button type="button" class="btn btn-outline clear-filters" (click)="clearFilters()" aria-label="Clear filters">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              Clear Filters
+            </button>
+          }
+        </div>
+        <div class="results-count">
+          Showing {{ filteredProducts().length }} of {{ allProducts.length }} products
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="section products-grid-section" aria-labelledby="products-grid-title">
+    <div class="container">
+      <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" role="list">
+        @for (product of filteredProducts(); track product.id) {
+          <app-product-card [product]="product" [showEnquireButton]="true" role="listitem"></app-product-card>
+        }
+        @if (filteredProducts().length === 0) {
+          <div class="no-results" role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <h3>No products found</h3>
+            <p>Try adjusting your search or filter criteria</p>
+            <button type="button" class="btn btn-primary mt-4" (click)="clearFilters()">Clear All Filters</button>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <app-cta-section
+    title="Need Help Choosing the Right Product?"
+    subtitle="Our fire safety experts can help you select the best equipment for your specific needs."
+    primaryButtonText="Contact Our Experts"
+    primaryButtonLink="/contact-us"
+    secondaryButtonText="Submit an Enquiry"
+    secondaryButtonLink="/enquiry"
+  ></app-cta-section>
+</div>

@@ -1,0 +1,40 @@
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-float:hover {
+  animation: none;
+}
+
+.whatsapp-float svg {
+  display: block;
+}
+
+@media (max-width: 639px) {
+  .whatsapp-float {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .whatsapp-float svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Ensure button doesn't cover footer on mobile */
+@media (max-width: 767px) {
+  .whatsapp-float {
+    bottom: 90px;
+  }
+}

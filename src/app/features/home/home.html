@@ -1,0 +1,160 @@
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-background" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="container hero-content">
+      <h1 id="hero-title" class="hero-title">Complete Fire Safety Solutions for a Safer Tomorrow</h1>
+      <p class="hero-subtitle">
+        Your trusted partner in fire protection since 2021. We provide reliable fire safety products,
+        professional installation, testing and maintenance services for homes, businesses and industries.
+      </p>
+      <div class="hero-buttons">
+        <a routerLink="/collections-products" class="btn btn-primary btn-lg">
+          Explore Our Products
+        </a>
+        <a routerLink="/enquiry" class="btn btn-outline-light btn-lg">
+          Request a Quote
+        </a>
+      </div>
+      <div class="hero-contact">
+        <a [href]="getPhoneUrl(getPhones()[0])" class="hero-phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+                  <span>Call Now: {{ getPhones()[0] }}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Introduction -->
+  <section class="section company-intro" id="about" aria-labelledby="intro-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="intro-title" class="section-title">Welcome to All India Fire Solutions</h2>
+      </div>
+      <div class="intro-content">
+        <div class="intro-text">
+          <p>
+            Since our founding in 2021, All India Fire Solutions has been dedicated to safeguarding lives,
+            property and businesses from fire hazards with reliable, innovative and high-quality safety systems.
+          </p>
+          <p>
+            Our professional team provides end-to-end fire safety services, including the supply, installation,
+            testing and maintenance of fire safety equipment and systems.
+          </p>
+          <p>
+            At All India Fire Solutions, safety is not just a service — it is our mission.
+          </p>
+          <p>
+            We aim to create fire-safe workplaces, homes and industries, ensuring peace of mind for all our clients.
+          </p>
+          <a routerLink="/about-us" class="btn btn-primary mt-4">Read More</a>
+        </div>
+        <div class="intro-image">
+          <div class="image-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Products -->
+  <section class="section products-section" id="products" aria-labelledby="products-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="products-title" class="section-title">Our Core Products</h2>
+        <p class="section-subtitle">Explore our comprehensive range of fire safety products designed for maximum protection and reliability.</p>
+      </div>
+      <div class="products-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+        @for (product of featuredProducts; track product.id) {
+          <app-product-card [product]="product" [showEnquireButton]="true"></app-product-card>
+        }
+      </div>
+      <div class="section-footer text-center mt-8">
+        <a routerLink="/collections-products" class="btn btn-outline">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section services-section" id="services" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="services-title" class="section-title">Complete Fire Protection Services</h2>
+        <p class="section-subtitle">We offer a full range of professional fire safety services to meet all your protection requirements.</p>
+      </div>
+      <div class="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        @for (service of services; track service.id) {
+          <app-service-card [service]="service"></app-service-card>
+        }
+      </div>
+      <div class="section-footer text-center mt-8">
+        <a routerLink="/about-us" class="btn btn-outline">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="section why-choose-section" id="why-choose" aria-labelledby="why-choose-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="why-choose-title" class="section-title">Why Choose All India Fire Solutions?</h2>
+        <p class="section-subtitle">We are committed to delivering excellence in fire safety through expertise, quality, and customer-focused service.</p>
+      </div>
+      <div class="why-choose-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        @for (item of whyChooseUs; track item.id) {
+          <article class="why-choose-card card">
+            <div class="why-choose-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <h3 class="why-choose-title">{{ item.title }}</h3>
+            <p class="why-choose-description">{{ item.description }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries We Serve -->
+  <section class="section industries-section" id="industries" aria-labelledby="industries-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="industries-title" class="section-title">Industries We Serve</h2>
+        <p class="section-subtitle">Our fire safety solutions protect diverse sectors with customized approaches for each industry.</p>
+      </div>
+      <div class="industries-grid grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
+        @for (industry of industries; track industry.id) {
+          <article class="industry-card card">
+            <div class="industry-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <h3 class="industry-name">{{ industry.name }}</h3>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <app-cta-section></app-cta-section>
+
+  <!-- Contact Information -->
+  <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="contact-title" class="section-title">Contact Information</h2>
+      </div>
+      <app-contact-info></app-contact-info>
+    </div>
+  </section>
+</div>
