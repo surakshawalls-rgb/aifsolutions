@@ -1,387 +1,237 @@
 <div class="enquiry-page">
-  <!-- Page Hero -->
-  <section class="page-hero" aria-labelledby="page-title">
-    <div class="page-hero-background" aria-hidden="true"></div>
-    <div class="page-hero-overlay" aria-hidden="true"></div>
-    <div class="container page-hero-content">
-      <h1 id="page-title" class="page-hero-title">Submit an Enquiry</h1>
-      <p class="page-hero-subtitle">Fill out the form below and our team will get back to you shortly</p>
+  <!-- Header band -->
+  <section class="e-hero" aria-labelledby="page-title">
+    <div class="container">
+      <p class="eyebrow">REQUEST A QUOTE</p>
+      <h1 id="page-title">Tell us what you need to protect</h1>
+      <p class="e-hero-sub">Share a few details and our fire safety team will respond with the right solution and a clear quote.</p>
+      <ul class="e-trust">
+        <li>Reply within 24 hours</li>
+        <li>No-obligation quote</li>
+        <li>ISI &amp; BIS certified products</li>
+      </ul>
     </div>
   </section>
 
-  <!-- Enquiry Form -->
-  <section class="section enquiry-form-section" aria-labelledby="form-title">
-    <div class="container">
-      <div class="form-layout">
-        <!-- Form -->
-        <div class="form-card card">
-          <div class="form-header">
-            <h2 id="form-title" class="form-title">Enquiry Form</h2>
-            <p class="form-subtitle">All fields marked with <span class="required" aria-hidden="true">*</span> are required</p>
-          </div>
-
-          <form [formGroup]="enquiryForm" (ngSubmit)="onSubmit()" class="enquiry-form" novalidate>
-            <!-- Personal Information -->
-            <fieldset class="form-section">
-              <legend class="section-legend">Personal Information</legend>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="fullName" class="form-label">
-                    Full Name <span class="required" aria-hidden="true">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    class="form-input"
-                    formControlName="fullName"
-                    placeholder="Enter your full name"
-                    [class.error]="f['fullName'].invalid && f['fullName'].touched"
-                    aria-describedby="fullName-error"
-                    autocomplete="name"
-                  />
-                  @if (f['fullName'].invalid && f['fullName'].touched) {
-                    <div id="fullName-error" class="form-error" role="alert">
-                      @if (f['fullName'].errors?.['required']) {
-                        Full name is required
-                      } @else if (f['fullName'].errors?.['minlength']) {
-                        Full name must be at least 2 characters
-                      }
-                    </div>
-                  }
-                </div>
-
-                <div class="form-group">
-                  <label for="mobileNumber" class="form-label">
-                    Mobile Number <span class="required" aria-hidden="true">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="mobileNumber"
-                    class="form-input"
-                    formControlName="mobileNumber"
-                    placeholder="Enter 10-digit mobile number"
-                    [class.error]="f['mobileNumber'].invalid && f['mobileNumber'].touched"
-                    aria-describedby="mobileNumber-error"
-                    autocomplete="tel"
-                    maxlength="10"
-                  />
-                  @if (f['mobileNumber'].invalid && f['mobileNumber'].touched) {
-                    <div id="mobileNumber-error" class="form-error" role="alert">
-                      @if (f['mobileNumber'].errors?.['required']) {
-                        Mobile number is required
-                      } @else if (f['mobileNumber'].errors?.['pattern']) {
-                        Enter a valid 10-digit Indian mobile number
-                      }
-                    </div>
-                  }
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="email" class="form-label">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    class="form-input"
-                    formControlName="email"
-                    placeholder="Enter your email address"
-                    [class.error]="f['email'].invalid && f['email'].touched"
-                    aria-describedby="email-error"
-                    autocomplete="email"
-                  />
-                  @if (f['email'].invalid && f['email'].touched) {
-                    <div id="email-error" class="form-error" role="alert">
-                      Enter a valid email address
-                    </div>
-                  }
-                </div>
-
-                <div class="form-group">
-                  <label for="company" class="form-label">
-                    Company / Organization
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    class="form-input"
-                    formControlName="company"
-                    placeholder="Enter company name (optional)"
-                    autocomplete="organization"
-                  />
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="city" class="form-label">
-                    City
-                  </label>
-                  <input
-                    type="text"
-                    id="city"
-                    class="form-input"
-                    formControlName="city"
-                    placeholder="Enter your city"
-                    autocomplete="address-level2"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label for="state" class="form-label">
-                    State
-                  </label>
-                  <input
-                    type="text"
-                    id="state"
-                    class="form-input"
-                    formControlName="state"
-                    placeholder="Enter your state"
-                    autocomplete="address-level1"
-                  />
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- Enquiry Details -->
-            <fieldset class="form-section">
-              <legend class="section-legend">Enquiry Details</legend>
-
-              <div class="form-group">
-                <label for="enquiryType" class="form-label">
-                  Enquiry Type <span class="required" aria-hidden="true">*</span>
-                </label>
-                <select
-                  id="enquiryType"
-                  class="form-select"
-                  formControlName="enquiryType"
-                  [class.error]="f['enquiryType'].invalid && f['enquiryType'].touched"
-                  aria-describedby="enquiryType-error"
-                >
-                  @for (type of enquiryTypes; track type.value) {
-                    <option [value]="type.value">{{ type.label }}</option>
-                  }
-                </select>
-                @if (f['enquiryType'].invalid && f['enquiryType'].touched) {
-                  <div id="enquiryType-error" class="form-error" role="alert">
-                    Please select an enquiry type
-                  </div>
-                }
-              </div>
-
-              <div class="form-group">
-                <label for="productService" class="form-label">
-                  Product / Service
-                </label>
-                <select
-                  id="productService"
-                  class="form-select"
-                  formControlName="productService"
-                >
-                  <option value="">Select a product or service (optional)</option>
-                  @for (product of products; track product.id) {
-                    <option [value]="product.name">{{ product.name }} ({{ product.category }})</option>
-                  }
-                </select>
-                @if (prefilledProduct()) {
-                  <div class="prefilled-notice">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="12" y1="8" x2="12" y2="12"></line>
-                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                    </svg>
-                    <span>Pre-filled from product page: {{ prefilledProduct()!.name }}</span>
-                  </div>
-                }
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="quantity" class="form-label">
-                    Quantity (optional)
-                  </label>
-                  <input
-                    type="number"
-                    id="quantity"
-                    class="form-input"
-                    formControlName="quantity"
-                    placeholder="Enter quantity"
-                    min="1"
-                    [class.error]="f['quantity'].invalid && f['quantity'].touched"
-                    aria-describedby="quantity-error"
-                  />
-                  @if (f['quantity'].invalid && f['quantity'].touched) {
-                    <div id="quantity-error" class="form-error" role="alert">
-                      Quantity must be at least 1
-                    </div>
-                  }
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="message" class="form-label">
-                  Message / Requirements <span class="required" aria-hidden="true">*</span>
-                </label>
-                <textarea
-                  id="message"
-                  class="form-textarea"
-                  formControlName="message"
-                  placeholder="Describe your requirements, specifications, or any other details..."
-                  rows="5"
-                  [class.error]="f['message'].invalid && f['message'].touched"
-                  aria-describedby="message-error"
-                ></textarea>
-                @if (f['message'].invalid && f['message'].touched) {
-                  <div id="message-error" class="form-error" role="alert">
-                    @if (f['message'].errors?.['required']) {
-                      Message is required
-                    } @else if (f['message'].errors?.['minlength']) {
-                      Message must be at least 10 characters
-                    }
-                  </div>
-                }
-                <div class="character-count" [class.warning]="f['message'].value?.length > 500">
-                  {{ f['message'].value?.length || 0 }} characters
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- Submit Buttons -->
-            <div class="form-actions">
-              <button
-                type="submit"
-                class="btn btn-primary btn-lg"
-                [disabled]="isSubmitting()"
-                [class.loading]="isSubmitting()"
-              >
-                @if (isSubmitting()) {
-                  <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
-                    <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
-                  </svg>
-                  Submitting...
-                } @else {
-                  Submit Enquiry
-                }
-              </button>
-
-              <button
-                type="button"
-                class="btn btn-whatsapp btn-lg"
-                (click)="onWhatsAppEnquiry()"
-                [disabled]="isSubmitting()"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.673m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378 3.43 3.43 0 0 1-.372-.224 4.07 4.07 0 0 1-.124-.372c0-.174-.025-.349-.1-.524a3.288 3.288 0 0 1 0-.299c.149-.373.767-.992 1.24-1.167.373-.124.67-.174 2.345-.174 1.142 0 1.83.1 2.413.373.757.349 1.38 1.1 1.553 1.778.173.673.124 1.168-.05 1.615-.124.323-.373.62-.748.942-.497.422-1.984 1.93-2.58 2.328-.373.249-.748.373-1.293.373-.223 0-.447-.026-.67-.075z"/>
-                </svg>
-                Send via WhatsApp
-              </button>
+  <section class="e-main">
+    <div class="container e-grid">
+      <!-- FORM -->
+      <div class="e-card">
+        @if (submitSuccess()) {
+          <div id="submit-success" class="e-done" role="alert">
+            <div class="e-done-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
             </div>
-
-            <!-- Success Message -->
-            @if (submitSuccess()) {
-              <div id="submit-success" class="success-message" role="alert">
-                <div class="success-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                  </svg>
-                </div>
-                <h3>Enquiry Submitted Successfully!</h3>
-                <p>Thank you for contacting us. Our team will review your enquiry and get back to you within 24 hours.</p>
-                <button type="button" class="btn btn-outline mt-4" (click)="submitSuccess.set(false)">Submit Another Enquiry</button>
+            <h2>Thank you! Your enquiry is in.</h2>
+            <p>Our team will review your requirements and get back to you within 24 hours. For anything urgent, call us directly.</p>
+            <div class="e-done-actions">
+              <a [href]="getPhoneUrl(getPhones()[0])" class="btn btn-primary">Call {{ getPhones()[0] }}</a>
+              <button type="button" class="btn btn-ghost" (click)="submitSuccess.set(false)">Submit another enquiry</button>
+            </div>
+          </div>
+        } @else {
+          <form [formGroup]="enquiryForm" (ngSubmit)="onSubmit()" novalidate>
+            <!-- Step 1 -->
+            <fieldset class="e-step">
+              <legend><span class="no">1</span> What do you need?</legend>
+              <div class="types" role="radiogroup" aria-label="Enquiry type">
+                @for (type of enquiryTypes; track type.value) {
+                  <label class="type">
+                    <input type="radio" formControlName="enquiryType" [value]="type.value" />
+                    <span class="type-box">
+                      <strong>{{ type.label }}</strong>
+                      <small>{{ typeHints[type.value] }}</small>
+                    </span>
+                  </label>
+                }
               </div>
-            }
+            </fieldset>
 
-            <!-- Error Message -->
-            @if (submitError()) {
-              <div class="error-message" role="alert">
-                <div class="error-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="15" y1="9" x2="9" y2="15"></line>
-                    <line x1="9" y1="9" x2="15" y2="15"></line>
-                  </svg>
+            <!-- Step 2 -->
+            <fieldset class="e-step">
+              <legend><span class="no">2</span> {{ cfg().detailsTitle }}</legend>
+              <p class="hint">{{ cfg().detailsHint }}</p>
+              <div class="row">
+                <div class="fld">
+                  <label for="fullName">Full name <b>*</b></label>
+                  <input id="fullName" type="text" class="form-input" formControlName="fullName" placeholder="e.g. Rahul Sharma" autocomplete="name"
+                    [class.error]="f['fullName'].invalid && f['fullName'].touched" />
+                  @if (f['fullName'].invalid && f['fullName'].touched) {
+                    <span class="err" role="alert">Please enter your full name</span>
+                  }
                 </div>
-                <p>{{ submitError() }}</p>
-              </div>
-            }
-          </form>
-        </div>
-
-        <!-- Contact Info Sidebar -->
-        <aside class="contact-sidebar" aria-labelledby="sidebar-title">
-          <div class="contact-card card">
-            <h3 id="sidebar-title" class="sidebar-title">Contact Information</h3>
-
-            <div class="sidebar-contact">
-              <div class="sidebar-contact-item">
-                <div class="sidebar-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                </div>
-                <div class="sidebar-details">
-                  <h4>Address</h4>
-                  <address>{{ getAddress() }}</address>
+                <div class="fld">
+                  <label for="mobileNumber">Mobile number <b>*</b></label>
+                  <input id="mobileNumber" type="tel" class="form-input" formControlName="mobileNumber" placeholder="10-digit mobile number" maxlength="10" autocomplete="tel"
+                    [class.error]="f['mobileNumber'].invalid && f['mobileNumber'].touched" />
+                  @if (f['mobileNumber'].invalid && f['mobileNumber'].touched) {
+                    <span class="err" role="alert">Enter a valid 10-digit Indian mobile number</span>
+                  }
                 </div>
               </div>
-
-              <div class="sidebar-contact-item">
-                <div class="sidebar-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
+              <div class="row">
+                <div class="fld">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" class="form-input" formControlName="email" placeholder="you@company.com" autocomplete="email"
+                    [class.error]="f['email'].invalid && f['email'].touched" />
+                  @if (f['email'].invalid && f['email'].touched) {
+                    <span class="err" role="alert">Enter a valid email address</span>
+                  }
                 </div>
-                <div class="sidebar-details">
-                  <h4>Email</h4>
-                  <a [href]="getEmailUrl()" class="sidebar-link">{{ getEmail() }}</a>
+                <div class="fld">
+                  <label for="company">Company / organization @if (cfg().companyRequired) {<b>*</b>}</label>
+                  <input id="company" type="text" class="form-input" formControlName="company" [placeholder]="cfg().companyRequired ? 'Your organization name' : 'Optional'" autocomplete="organization"
+                    [class.error]="f['company'].invalid && f['company'].touched" />
+                  @if (f['company'].invalid && f['company'].touched) {
+                    <span class="err" role="alert">Please enter your company or organization</span>
+                  }
                 </div>
               </div>
+              <div class="row">
+                <div class="fld">
+                  <label for="city">{{ cfg().locationLabel }}</label>
+                  <input id="city" type="text" class="form-input" formControlName="city" placeholder="e.g. Varanasi" autocomplete="address-level2" />
+                </div>
+                <div class="fld">
+                  <label for="state">State</label>
+                  <input id="state" type="text" class="form-input" formControlName="state" placeholder="e.g. Uttar Pradesh" autocomplete="address-level1" />
+                </div>
+              </div>
+            </fieldset>
 
-              @for (phone of getPhones(); track phone) {
-                <div class="sidebar-contact-item">
-                  <div class="sidebar-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                  </div>
-                  <div class="sidebar-details">
-                    <h4>Phone</h4>
-                    <a [href]="getPhoneUrl(phone)" class="sidebar-link">{{ phone }}</a>
+            <!-- Step 3 (changes with the selected type) -->
+            <fieldset class="e-step fadein">
+              <legend><span class="no">3</span> {{ cfg().requirementTitle }}</legend>
+
+              @if (cfg().showProduct || cfg().showQuantity) {
+                <div class="row">
+                  @if (cfg().showProduct) {
+                    <div class="fld">
+                      <label for="productService">{{ cfg().productLabel }} @if (cfg().productRequired) {<b>*</b>}</label>
+                      <select id="productService" class="form-select" formControlName="productService"
+                        [class.error]="f['productService'].invalid && f['productService'].touched">
+                        <option value="">{{ cfg().productPlaceholder }}</option>
+                        @for (group of productGroups(); track group.category) {
+                          <optgroup [label]="group.category">
+                            @for (product of group.items; track product.id) {
+                              <option [value]="product.name">{{ product.name }}</option>
+                            }
+                          </optgroup>
+                        }
+                        @if (cfg().productExtraOption) {
+                          <option [value]="cfg().productExtraOption">{{ cfg().productExtraOption }}</option>
+                        }
+                      </select>
+                      @if (f['productService'].invalid && f['productService'].touched) {
+                        <span class="err" role="alert">Please select an option</span>
+                      }
+                    </div>
+                  }
+                  @if (cfg().showQuantity) {
+                    <div class="fld">
+                      <label for="quantity">{{ cfg().quantityLabel }} @if (cfg().quantityRequired) {<b>*</b>}</label>
+                      <input id="quantity" type="number" min="1" class="form-input" formControlName="quantity"
+                        [placeholder]="cfg().quantityRequired ? 'e.g. 10' : 'Optional'"
+                        [class.error]="f['quantity'].invalid && f['quantity'].touched" />
+                      @if (f['quantity'].invalid && f['quantity'].touched) {
+                        <span class="err" role="alert">Enter a quantity of at least 1</span>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+
+              @if (cfg().showProduct && selectedProduct(); as sp) {
+                <div class="pv">
+                  <img [src]="sp.imageUrl" [alt]="sp.name" />
+                  <div>
+                    <span class="pv-cat">{{ sp.category }}</span>
+                    <strong>{{ sp.name }}</strong>
+                    <p>{{ sp.shortDescription }}</p>
+                    @if (sp.features?.length) {
+                      <ul>
+                        @for (ft of sp.features!.slice(0, 3); track ft) { <li>{{ ft }}</li> }
+                      </ul>
+                    }
                   </div>
                 </div>
               }
 
-              <div class="sidebar-contact-item whatsapp">
-                <div class="sidebar-icon">
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.673m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378 3.43 3.43 0 0 1-.372-.224 4.07 4.07 0 0 1-.124-.372c0-.174-.025-.349-.1-.524a3.288 3.288 0 0 1 0-.299c.149-.373.767-.992 1.24-1.167.373-.124.67-.174 2.345-.174 1.142 0 1.83.1 2.413.373.757.349 1.38 1.1 1.553 1.778.173.673.124 1.168-.05 1.615-.124.323-.373.62-.748.942-.497.422-1.984 1.93-2.58 2.328-.373.249-.748.373-1.293.373-.223 0-.447-.026-.67-.075z"/>
-                  </svg>
+              @if (cfg().fields.length) {
+                <div formGroupName="extra" class="row">
+                  @for (field of cfg().fields; track field.key) {
+                    <div class="fld">
+                      <label [for]="'x-' + field.key">{{ field.label }} @if (field.required) {<b>*</b>}</label>
+                      @if (field.type === 'select') {
+                        <select [id]="'x-' + field.key" class="form-select" [formControlName]="field.key"
+                          [class.error]="extraInvalid(field.key)">
+                          <option value="">{{ field.required ? 'Select an option' : 'Select (optional)' }}</option>
+                          @for (opt of field.options; track opt) {
+                            <option [value]="opt">{{ opt }}</option>
+                          }
+                        </select>
+                      } @else {
+                        <input [id]="'x-' + field.key" [type]="field.type" class="form-input" [formControlName]="field.key"
+                          [placeholder]="field.placeholder || ''" [attr.min]="field.type === 'number' ? 0 : null"
+                          [class.error]="extraInvalid(field.key)" />
+                      }
+                      @if (extraInvalid(field.key)) {
+                        <span class="err" role="alert">This field is required</span>
+                      }
+                    </div>
+                  }
                 </div>
-                <div class="sidebar-details">
-                  <h4>WhatsApp</h4>
-                  <a [href]="getWhatsAppUrl()" class="sidebar-link whatsapp-link" target="_blank" rel="noopener">Chat with us</a>
-                </div>
-              </div>
-            </div>
+              }
 
-            <div class="sidebar-note">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-              <p>We typically respond within 24 hours during business days.</p>
+              <div class="fld">
+                <label for="message">{{ cfg().messageLabel }} @if (cfg().messageRequired) {<b>*</b>}</label>
+                <textarea id="message" rows="4" class="form-textarea" formControlName="message"
+                  [placeholder]="cfg().messagePlaceholder"
+                  [class.error]="f['message'].invalid && f['message'].touched"></textarea>
+                @if (f['message'].invalid && f['message'].touched) {
+                  <span class="err" role="alert">Please write at least 10 characters</span>
+                }
+              </div>
+            </fieldset>
+
+            @if (submitError()) {
+              <div class="e-error" role="alert">{{ submitError() }}</div>
+            }
+
+            <div class="e-actions">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="isSubmitting()">
+                {{ isSubmitting() ? 'Submitting...' : 'Submit Enquiry' }}
+              </button>
+              <button type="button" class="btn btn-whatsapp btn-lg" (click)="onWhatsAppEnquiry()" [disabled]="isSubmitting()">
+                Send via WhatsApp
+              </button>
             </div>
-          </div>
-        </aside>
+            <p class="e-note">Fields marked <b>*</b> are required. Your details are used only to respond to this enquiry.</p>
+          </form>
+        }
       </div>
+
+      <!-- SIDEBAR -->
+      <aside class="e-side" aria-label="Contact and process">
+        <div class="side-card dark">
+          <h2>Prefer to talk?</h2>
+          <p>Speak to our team directly for urgent requirements.</p>
+          @for (phone of getPhones(); track phone) {
+            <a [href]="getPhoneUrl(phone)" class="side-link">{{ phone }}</a>
+          }
+          <a [href]="getEmailUrl()" class="side-link small">{{ getEmail() }}</a>
+          <a [href]="getWhatsAppUrl()" target="_blank" rel="noopener" class="btn btn-whatsapp side-btn">Chat on WhatsApp</a>
+        </div>
+
+        <div class="side-card">
+          <h2>What happens next</h2>
+          <ol class="steps">
+            <li><span>1</span><div><strong>You submit</strong><small>Share your requirement in a minute.</small></div></li>
+            <li><span>2</span><div><strong>We get in touch</strong><small>An expert calls to understand your needs.</small></div></li>
+            <li><span>3</span><div><strong>You get a quote</strong><small>A clear proposal, or a site visit if needed.</small></div></li>
+          </ol>
+        </div>
+      </aside>
     </div>
   </section>
 </div>

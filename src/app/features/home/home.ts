@@ -1,90 +1,110 @@
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ProductDataService } from '../../data-access/products/product-data.service';
 import { CompanyConfigService } from '../../core/services/company-config.service';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card';
-import { ServiceCardComponent } from '../../shared/components/service-card/service-card';
 import { CtaSectionComponent } from '../../shared/components/cta-section/cta-section';
 import { ContactInfoComponent } from '../../shared/components/contact-info/contact-info';
-import { Product, Service, Industry, WhyChooseUs } from '../../core/models';
+import { Product } from '../../core/models';
+
+interface SolutionTile {
+  name: string;
+  image?: string;
+  link: string;
+  query?: Record<string, string>;
+}
+
+interface Pillar {
+  title: string;
+  text: string;
+}
+
+interface Stat {
+  value: string;
+  label: string;
+}
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ProductCardComponent, ServiceCardComponent, CtaSectionComponent, ContactInfoComponent],
+  imports: [RouterLink, ProductCardComponent, CtaSectionComponent, ContactInfoComponent],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
 export class HomeComponent implements OnInit {
   private productData = inject(ProductDataService);
   protected companyConfig = inject(CompanyConfigService);
-  private platformId = inject(PLATFORM_ID);
 
-  products: Product[] = [];
   featuredProducts: Product[] = [];
+  productCount = 0;
 
-  services: Service[] = [
-    { id: 'extinguisher-supply', name: 'Fire Extinguisher Supply', description: 'Supply of all types of fire extinguishers including ABC, CO2, Foam, Water, and Clean Agent extinguishers.' },
-    { id: 'extinguisher-refilling', name: 'Fire Extinguisher Refilling & Servicing', description: 'Professional refilling, pressure testing, and servicing of all types of fire extinguishers as per IS 2190 standards.' },
-    { id: 'hydrant-installation', name: 'Fire Hydrant System Installation', description: 'Complete design, supply, installation, and commissioning of internal and external fire hydrant systems.' },
-    { id: 'sprinkler-installation', name: 'Fire Sprinkler System Installation', description: 'Wet, dry, pre-action, and deluge sprinkler systems designed and installed as per NFPA 13 standards.' },
-    { id: 'alarm-installation', name: 'Fire Alarm Installation', description: 'Addressable and conventional fire alarm systems with detectors, panels, and notification devices.' },
-    { id: 'safety-audits', name: 'Fire Safety Audits', description: 'Comprehensive fire safety audits, risk assessments, and consultancy for compliance with NBC and local regulations.' },
-    { id: 'amc', name: 'Annual Maintenance Contracts', description: 'AMC for fire extinguishers, hydrant systems, sprinkler systems, and fire alarm systems.' },
-    { id: 'training', name: 'Fire Safety Training', description: 'Basic fire fighting, extinguisher handling, fire evacuation drills, mock fire drills, and safety programs.' },
+  // Quick-jump chips shown right under the hero (like "Application Areas")
+  applicationAreas = [
+    'Homes', 'Offices', 'Factories', 'Hotels & Restaurants', 'Hospitals',
+    'Warehouses', 'Schools', 'Commercial Buildings',
   ];
 
-  industries: Industry[] = [
-    { id: 'residential', name: 'Residential Buildings', icon: 'home' },
-    { id: 'offices', name: 'Offices', icon: 'building' },
-    { id: 'factories', name: 'Factories & Industries', icon: 'factory' },
-    { id: 'hotels', name: 'Hotels & Restaurants', icon: 'hotel' },
-    { id: 'hospitals', name: 'Hospitals', icon: 'hospital' },
-    { id: 'commercial', name: 'Commercial Buildings', icon: 'building-2' },
-    { id: 'education', name: 'Educational Institutions', icon: 'school' },
-    { id: 'warehouses', name: 'Warehouses', icon: 'warehouse' },
+  // "Our Hallmark" - four pillars
+  pillars: Pillar[] = [
+    {
+      title: 'Complete Fire Safety Portfolio',
+      text: 'Extinguishers, suppression products, hydrants, sprinklers, alarms and accessories, all under one roof.',
+    },
+    {
+      title: 'Quality You Can Trust',
+      text: 'ISI marked, BIS certified products from trusted manufacturers, built to perform when it matters.',
+    },
+    {
+      title: 'End-to-End Solutions',
+      text: 'Supply, installation, testing, refilling and maintenance. You never need to look elsewhere.',
+    },
+    {
+      title: 'Prompt Support',
+      text: 'Quick response times and emergency support for your critical fire safety needs.',
+    },
   ];
 
-  whyChooseUs: WhyChooseUs[] = [
-    { id: 'experienced', title: 'Experienced and Certified Professionals', description: 'Our team comprises certified fire safety experts with years of hands-on experience in the industry.' },
-    { id: 'iso', title: 'ISO 9001:2015 Certified Company', description: 'We maintain the highest quality standards in all our products and services.' },
-    { id: 'comprehensive', title: 'Comprehensive Fire Safety Solutions', description: 'From supply to installation, testing, and maintenance - we provide end-to-end fire protection.' },
-    { id: 'prompt', title: 'Prompt Service and Emergency Support', description: 'Quick response times and 24/7 emergency support for critical fire safety needs.' },
-    { id: 'quality', title: 'Commitment to Quality and Reliability', description: 'All products are ISI marked, BIS certified, and sourced from trusted manufacturers.' },
-    { id: 'satisfaction', title: 'Customer Satisfaction', description: 'Our growing client base across industries is a testament to our service excellence.' },
+  // "Our Full Spectrum Fire Solutions" - tiles
+  solutions: SolutionTile[] = [
+    { name: 'Fire Extinguishers', image: 'assets/images/products/abc-extinguisher.svg', link: '/collections-products' },
+    { name: 'Fire Suppression', image: 'assets/images/products/fire-stop.svg', link: '/collections-products' },
+    { name: 'Fire Balls', image: 'assets/images/products/fire-ball.svg', link: '/collections-products' },
+    { name: 'Hydrant Systems', image: 'assets/images/products/fire-hydrant.svg', link: '/collections-products' },
+    { name: 'Sprinkler Systems', image: 'assets/images/products/fire-sprinkler.svg', link: '/collections-products' },
+    { name: 'Alarm Solutions', image: 'assets/images/products/fire-alarm.svg', link: '/collections-products' },
+    { name: 'Safety Equipment', image: 'assets/images/products/fire-bucket.svg', link: '/collections-products' },
+    { name: 'Services & AMC', link: '/enquiry', query: { type: 'amc' } },
   ];
+
+  // "Solutions for a wide variety of applications"
+  applications = [
+    { name: 'Homes', text: 'Compact, easy-to-use protection for families.' },
+    { name: 'Offices', text: 'Keep people, records and equipment safe.' },
+    { name: 'Factories', text: 'Heavy-duty systems for industrial risk.' },
+    { name: 'Hotels & Restaurants', text: 'Kitchen and guest-area fire protection.' },
+    { name: 'Hospitals', text: 'Reliable systems where lives depend on it.' },
+    { name: 'Warehouses', text: 'Protect stock and large open spaces.' },
+  ];
+
+  stats: Stat[] = [];
 
   ngOnInit() {
-    this.products = this.productData.getProducts();
-    this.featuredProducts = this.products.slice(0, 6);
+    const all = this.productData.getProducts();
+    this.productCount = all.length;
+    this.featuredProducts = all.slice(0, 3);
+    this.stats = [
+      { value: String(this.companyConfig.getEstablishedYear()), label: 'Serving customers since' },
+      { value: `${all.length}+`, label: 'Fire safety products' },
+      { value: '8', label: 'Professional services' },
+      { value: '24/7', label: 'Emergency support' },
+    ];
   }
 
-  getCompanyName() {
-    return this.companyConfig.getName();
+  getPhones() {
+    return this.companyConfig.getPhones();
   }
 
-  getTagline() {
-    return this.companyConfig.getTagline();
-  }
-
-  getEstablishedYear() {
-    return this.companyConfig.getEstablishedYear();
-  }
-
-    getPhones() {
-      return this.companyConfig.getPhones();
-    }
-
-    getPhoneUrl(phone: string) {
-      return this.companyConfig.getPhoneUrl(phone);
-    }
-
-    scrollToSection(sectionId: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+  getPhoneUrl(phone: string) {
+    return this.companyConfig.getPhoneUrl(phone);
   }
 }

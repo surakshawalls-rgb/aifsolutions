@@ -3,6 +3,7 @@ export interface CompanyConfig {
   tagline: string;
   established: number;
   address: string;
+  branchAddress: string;
   email: string;
   phones: string[];
   whatsapp: string;
@@ -16,6 +17,7 @@ export const companyConfig: CompanyConfig = {
   tagline: 'Your Safety, Our First Priority.',
   established: 2021,
   address: 'Suriyawan, Netanagar, Near Power House, Bhadohi-221404, Uttar Pradesh, India.',
+  branchAddress: 'Shuklaha, Near Tahsil Chauraha, Mirzapur-231001, Uttar Pradesh, India.',
   email: 'allindiafiresolutions@gmail.com',
   phones: ['+91 9580325152', '+91 7571080375'],
   whatsapp: '917571080375',
