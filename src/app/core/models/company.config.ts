@@ -15,7 +15,7 @@ export const companyConfig: CompanyConfig = {
   name: 'All India Fire Solutions',
   tagline: 'Your Safety, Our First Priority.',
   established: 2021,
-  address: 'Suriyawan, Netanagar, Near Power House, Bhadohi-221404, Uttar Pradesh, India.',
+  address: 'Suriyawan, Netanagar, (Near Power House), Bhadohi-221404, U.P.',
   email: 'allindiafiresolutions@gmail.com',
   phones: ['+91 9580325152', '+91 7571080375'],
   whatsapp: '917571080375',

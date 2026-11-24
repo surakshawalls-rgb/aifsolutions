@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CompanyConfigService } from '../../../core/services/company-config.service';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink],
   templateUrl: './footer.html',
   styleUrls: ['./footer.css'],
 })
@@ -22,6 +22,12 @@ export class FooterComponent {
     { path: '/enquiry', label: 'Enquiry' },
     { path: '/privacy-policy', label: 'Privacy Policy' },
     { path: '/terms-conditions', label: 'Terms & Conditions' },
+  ];
+
+  offices = [
+    { label: 'Head Office', address: 'Suriyawan, Netanagar, (Near Power House), Bhadohi-221404, U.P.' },
+    { label: 'Branch Office I', address: 'Kulesara, Greater Noida, Gautam Buddha Nagar-201306, U.P.' },
+    { label: 'Branch Office II', address: 'Shuklaha, Near Tahsil Chauraha, Mirzapur-231001, U.P.' },
   ];
 
   getCompanyName() {
@@ -58,5 +64,9 @@ export class FooterComponent {
 
   getEmailUrl() {
     return this.companyConfig.getEmailUrl();
+  }
+
+  getMapUrl(address: string) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
   }
 }
