@@ -1,104 +1,105 @@
 <div class="products-page">
-  <!-- Page Hero -->
-  <section class="page-hero" aria-labelledby="page-title">
-    <div class="page-hero-background" aria-hidden="true"></div>
-    <div class="page-hero-overlay" aria-hidden="true"></div>
-    <div class="container page-hero-content">
-      <h1 id="page-title" class="page-hero-title">Our Products</h1>
-      <p class="page-hero-subtitle">Explore our comprehensive range of fire safety products and equipment</p>
+  <!-- Header band -->
+  <section class="p-head" aria-labelledby="page-title">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><a routerLink="/home">Home</a> / <span>Products &amp; Services</span></nav>
+      <h1 id="page-title">Products &amp; Services</h1>
+      <p>Fire extinguishers, suppression systems, alarms and safety equipment. Pick a category or search, then get a quote.</p>
     </div>
   </section>
 
-  <!-- Search & Filter -->
-  <section class="section search-filter-section" aria-labelledby="filter-title">
-    <div class="container">
-      <div class="search-filter-card card">
-        <div class="search-filter-grid">
-          <div class="search-wrapper">
-            <label for="product-search" class="visually-hidden">Search products</label>
-            <div class="search-input-wrapper">
-              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-              <input
-                type="search"
-                id="product-search"
-                class="form-input search-input"
-                placeholder="Search products by name, description, or category..."
-                [value]="searchTerm()"
-                (input)="onSearchChange($event)"
-                aria-label="Search products"
-              />
-            </div>
-          </div>
-          <div class="filter-wrapper">
-            <label for="category-filter" class="visually-hidden">Filter by category</label>
-            <div class="select-wrapper">
-              <select
-                id="category-filter"
-                class="form-select category-select"
-                [value]="selectedCategory()"
-                (change)="onCategoryChange($event)"
-                aria-label="Filter by category"
-              >
-                <option value="">All Categories</option>
-                @for (category of categories; track category) {
-                  <option [value]="category">{{ category }}</option>
-                }
-              </select>
-              <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-          </div>
-          @if (searchTerm() || selectedCategory()) {
-            <button type="button" class="btn btn-outline clear-filters" (click)="clearFilters()" aria-label="Clear filters">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-              Clear Filters
+  <div class="container p-layout">
+    <!-- Sidebar: search + categories -->
+    <aside class="p-side" aria-label="Product categories">
+      <div class="p-search">
+        <label for="product-search" class="sr">Search products</label>
+        <input id="product-search" type="search" class="form-input" placeholder="Search products..."
+          [value]="searchTerm()" (input)="onSearchChange($event)" />
+      </div>
+
+      <h2 class="side-title">Categories</h2>
+      <ul class="cats">
+        <li>
+          <button type="button" [class.on]="!selectedCategory()" (click)="selectCategory('')">
+            All Products <span>{{ allProducts.length }}</span>
+          </button>
+        </li>
+        @for (c of categoryCounts; track c.name) {
+          <li>
+            <button type="button" [class.on]="selectedCategory() === c.name" (click)="selectCategory(c.name)">
+              {{ c.name }} <span>{{ c.count }}</span>
             </button>
-          }
-        </div>
-        <div class="results-count">
-          Showing {{ filteredProducts().length }} of {{ allProducts.length }} products
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Products Grid -->
-  <section class="section products-grid-section" aria-labelledby="products-grid-title">
-    <div class="container">
-      <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" role="list">
-        @for (product of filteredProducts(); track product.id) {
-          <app-product-card [product]="product" [showEnquireButton]="true" role="listitem"></app-product-card>
+          </li>
         }
-        @if (filteredProducts().length === 0) {
-          <div class="no-results" role="status">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <h3>No products found</h3>
-            <p>Try adjusting your search or filter criteria</p>
-            <button type="button" class="btn btn-primary mt-4" (click)="clearFilters()">Clear All Filters</button>
+      </ul>
+
+      <div class="p-help">
+        <strong>Need help choosing?</strong>
+        <p>Talk to our fire safety experts.</p>
+        <a [href]="getPhoneUrl(getPhones()[0])">{{ getPhones()[0] }}</a>
+      </div>
+    </aside>
+
+    <!-- Product sections -->
+    <div class="p-content">
+      <div class="p-bar" role="status">
+        <span>Showing {{ filteredProducts().length }} of {{ allProducts.length }} products</span>
+        @if (searchTerm() || selectedCategory()) {
+          <button type="button" class="clear" (click)="clearFilters()">Clear filters</button>
+        }
+      </div>
+
+      @for (section of sections(); track section.category) {
+        <section class="cat-sec" [attr.aria-label]="section.category">
+          <header class="cat-head">
+            <h2>{{ section.category }}</h2>
+            @if (!selectedCategory()) {
+              <button type="button" class="more" (click)="selectCategory(section.category)">View All &rarr;</button>
+            }
+          </header>
+
+          <div class="cards">
+            @for (p of section.items; track p.id) {
+              <article class="pc">
+                <!-- Blank image space: fill later (see showImages in products.ts) -->
+                <div class="slot" role="img" [attr.aria-label]="p.name + ' image'">
+                  @if (showImages) {
+                    <img [src]="p.imageUrl" [alt]="p.name" loading="lazy" />
+                  }
+                </div>
+                <div class="pc-body">
+                  <h3>{{ p.name }}</h3>
+                  <p class="price">Price on request</p>
+                  <ul class="spec">
+                    @for (s of specLines(p); track s.label) {
+                      <li><span>{{ s.label }}:</span> {{ s.value }}</li>
+                    }
+                  </ul>
+                </div>
+                <div class="pc-foot">
+                  <a routerLink="/enquiry" [queryParams]="{ product: p.id, type: 'product-enquiry' }" class="btn btn-primary">Get Quote</a>
+                  <a [href]="whatsAppUrl(p)" target="_blank" rel="noopener" class="wa" [attr.aria-label]="'WhatsApp us about ' + p.name">WhatsApp</a>
+                </div>
+              </article>
+            }
           </div>
-        }
-      </div>
+        </section>
+      } @empty {
+        <div class="none">
+          <h2>No products found</h2>
+          <p>Try a different search or category.</p>
+          <button type="button" class="btn btn-primary" (click)="clearFilters()">Show all products</button>
+        </div>
+      }
     </div>
-  </section>
+  </div>
 
-  <!-- CTA -->
   <app-cta-section
-    title="Need Help Choosing the Right Product?"
-    subtitle="Our fire safety experts can help you select the best equipment for your specific needs."
-    primaryButtonText="Contact Our Experts"
-    primaryButtonLink="/contact-us"
-    secondaryButtonText="Submit an Enquiry"
-    secondaryButtonLink="/enquiry"
+    title="Can't find what you're looking for?"
+    subtitle="Tell us your requirement and we will suggest the right fire safety solution."
+    primaryButtonText="Send an Enquiry"
+    primaryButtonLink="/enquiry"
+    secondaryButtonText="Contact Us"
+    secondaryButtonLink="/contact-us"
   ></app-cta-section>
 </div>

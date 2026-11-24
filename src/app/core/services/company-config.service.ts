@@ -23,6 +23,10 @@ export class CompanyConfigService {
     return this.config.address;
   }
 
+  getBranchAddress(): string {
+    return this.config.branchAddress;
+  }
+
   getEmail(): string {
     return this.config.email;
   }
